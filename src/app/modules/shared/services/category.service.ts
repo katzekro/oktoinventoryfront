@@ -17,9 +17,14 @@ export class CategoryService {
 
    //Obtener todas las categorias
    getAllCategories(){ 
-    const endpoint_all_categories = `${base_url}/categories`;
-    return this.http.get(endpoint_all_categories);
-
-
+    const endpointGetAllCategories = `${base_url}/categories`;
+    return this.http.get(endpointGetAllCategories);
    }
+
+   //Guardar Categoria
+   saveCategory( body:any ){
+    const endpointSaveCategory = ` ${base_url}/categories `;
+    return this.http.post(endpointSaveCategory, body);
+   }
+
 }

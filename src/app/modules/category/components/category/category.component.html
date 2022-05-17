@@ -16,7 +16,7 @@
     <div class="" fxFlex fxLayout="row" fxLayoutAlign="flex-end">
       <ul fxLayout="row" fxLayoutGap="20px">
         <li>
-          <button mat-raised-button color="primary">Agregar</button>
+          <button mat-raised-button color="primary" (click)="openCategoryDialog()" >Agregar</button>
         </li>
       </ul>
     </div>
@@ -63,9 +63,7 @@
 
     </table>  
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons>
-
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons></mat-paginator>
 
   </mat-card-content>
 
