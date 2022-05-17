@@ -27,4 +27,10 @@ export class CategoryService {
     return this.http.post(endpointSaveCategory, body);
    }
 
+   //actualizar Categoria
+   updateCategory( body:any, id:any ){
+    const endpointUpdateCategory = ` ${base_url}/categories/${id}`
+    return this.http.put( endpointUpdateCategory, body );
+   }
+
 }
