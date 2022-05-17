@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 import { CategoryService } from '../../../shared/services/category.service';
 import { NewCategoryComponent } from '../new-category/new-category.component';
 
@@ -77,7 +78,21 @@ export class CategoryComponent implements OnInit {
       }else if( result == 2 ){
         this.openSnackBar("Ocurrio un error", "Error");
       }
-    })
+    });
+  }
+
+  delete( id:number ){
+    const dialogRef = this.dialog.open( ConfirmComponent, {
+      data: { id: id} });
+
+    dialogRef.afterClosed().subscribe( result =>{
+      if( result == 1 ){
+        this.openSnackBar( "Eliminacion", "Operacion Existosa" );
+        this.getAllCategories();
+      }else if( result == 2 ){
+        this.openSnackBar("Ocurrio un error", "Error");
+      }
+    });
   }
 
   openSnackBar( message: string, action: string ) : MatSnackBarRef<SimpleSnackBar> {
