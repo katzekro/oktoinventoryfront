@@ -30,18 +30,20 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getAllCategories()
         .subscribe( (data:any) => {
           console.log('%ccategory.component.ts line:19 data', 'color: green', data);
-          this.proccessCategoriesResponse(data);
+          this.processCategoriesResponse(data);
         },( error:any ) => {
           console.log('%cerror category.component.ts line:21 ', 'color: red; display: block; width: 100%;', error);
         })
   }
 
-  proccessCategoriesResponse(resp:any){
+  processCategoriesResponse(resp:any){
     const dataCategory: CategoryElement[] =[];
     
     if( resp.metadata[0].code == "00" ){
+    console.log(`🚀 ~ file: category.component.ts ~ line 43 ~ CategoryComponent ~ processCategoriesResponse ~ resp.metadata[0].code`, resp.metadata[0].code)
 
       let listCategory = resp.categoryResponse.category;   
+      console.log(`🚀 ~ file: category.component.ts ~ line 46 ~ CategoryComponent ~ processCategoriesResponse ~ listCategory`, listCategory)
       listCategory.forEach( (element:CategoryElement) => {
         dataCategory.push( element );
       }); 
@@ -94,6 +96,24 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
+
+  buscar( termino: string){
+
+    if( termino.length === 0){
+      return this.getAllCategories();
+    }
+
+    console.log(`🚀 ~ file: category.component.ts ~ line 107 ~ CategoryComponent ~ buscar ~ termino`, termino)
+    this.categoryService.getCategoryById(termino)
+            .subscribe( (resp: any) => {
+              console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
+              this.processCategoriesResponse(resp);
+              console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
+            })
+  }
+
+
+
 
   openSnackBar( message: string, action: string ) : MatSnackBarRef<SimpleSnackBar> {
     return  this.snackBar.open(message,action,{

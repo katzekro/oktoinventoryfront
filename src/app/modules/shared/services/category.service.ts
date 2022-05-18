@@ -28,15 +28,21 @@ export class CategoryService {
    }
 
    //actualizar Categoria
-   updateCategory( body:any, id:any ){
-    const endpointUpdateCategory = ` ${base_url}/categories/${id}`
+   updateCategory( body:any, id:number ){
+    const endpointUpdateCategory = ` ${base_url}/categories/${id}`;
     return this.http.put( endpointUpdateCategory, body );
    }
 
    //Eliminar Categorias
    deleteCategory(id:number){
-     const endpointDeleteCategory = `${base_url}/categories/${id}`
+     const endpointDeleteCategory = `${base_url}/categories/${id}`;
      return this.http.delete( endpointDeleteCategory );
    }
+
+   //Buscar categoria por ID 
+   getCategoryById(id: any){
+    const endpoint = `${base_url}/categories/${id}`;
+    return this.http.get(endpoint);
+  }
 
 }
