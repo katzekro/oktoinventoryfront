@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
@@ -23,9 +24,13 @@ export class CategoryComponent implements OnInit {
     this.getAllCategories();
   }
 
+  //Paginador
   displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
   dataSource = new MatTableDataSource<CategoryElement>();
-
+  
+  @ViewChild(MatPaginator)
+  paginator !: MatPaginator
+  
   getAllCategories(){
     this.categoryService.getAllCategories()
         .subscribe( (data:any) => {
@@ -48,6 +53,7 @@ export class CategoryComponent implements OnInit {
         dataCategory.push( element );
       }); 
       this.dataSource = new MatTableDataSource<CategoryElement>(dataCategory);
+      this.dataSource.paginator = this.paginator;
     }
 
   }
@@ -105,14 +111,12 @@ export class CategoryComponent implements OnInit {
 
     console.log(`🚀 ~ file: category.component.ts ~ line 107 ~ CategoryComponent ~ buscar ~ termino`, termino)
     this.categoryService.getCategoryById(termino)
-            .subscribe( (resp: any) => {
-              console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
-              this.processCategoriesResponse(resp);
-              console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
-            })
+        .subscribe( (resp: any) => {
+          console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
+          this.processCategoriesResponse(resp);
+          console.log(`🚀 ~ file: category.component.ts ~ line 109 ~ CategoryComponent ~ .subscribe ~ resp`, resp)
+        })
   }
-
-
 
 
   openSnackBar( message: string, action: string ) : MatSnackBarRef<SimpleSnackBar> {

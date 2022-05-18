@@ -11,16 +11,7 @@
     </div>
   </mat-card-header>
 
-  <!-- Boton agregar -->
-  <mat-card-header>
-    <div class="" fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-      <ul fxLayout="row" fxLayoutGap="20px">
-        <li>
-          <button mat-raised-button color="primary" (click)="openCategoryDialog()" >Agregar</button>
-        </li>
-      </ul>
-    </div>
-  </mat-card-header>
+  
 
   <div mat-card-image></div>
   
@@ -69,5 +60,14 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons></mat-paginator>
 
   </mat-card-content>
-
+<!-- Boton agregar -->
+<mat-card-header>
+  <div class="" fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+    <ul fxLayout="row" fxLayoutGap="20px">
+      <li>
+        <button mat-raised-button color="primary" (click)="openCategoryDialog()" >Agregar</button>
+      </li>
+    </ul>
+  </div>
+</mat-card-header>
 </mat-card>
